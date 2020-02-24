@@ -30,6 +30,41 @@ If you give it a collection of years of tweet locations, you should be able to
 see the shape and relative popularity of every point of interest and every
 significant travel corridor.
 
+
+# Tutorial
+
+1. Install the Ubuntu Linux Bash shell from the Microsoft Store.  Follow the tutorial [here](https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/).  
+    * Make sure to setup your UNIX username and password to something that you'll remember.  Store it in your password manager!
+2. Open the Ubuntu Bash terminal on your Windows machine once everything is installed.
+    * ![](https://cl.ly/e7379ac2d470/download/Image%202019-05-05%20at%209.24.14%20AM.png)
+3. Change directory to your `C:/` drive in your Ubuntu shell - `cd ../../mnt/c`.  This should put you in the directory `/mnt/c` on your Windows C:/ drive.
+4. Install `git` to download the latest Tippecanoe
+    * `sudo apt-get install software-properties-common`
+    * `sudo apt-add-repository ppa:git-core/ppa`
+    * `sudo apt-get update`
+    * `sudo apt-get install git`
+    * `sudo apt-get install unzip`
+    * `sudo apt-get install wget`
+    * (if for some reason you have issues with git, you can download the Tippecanoe code to use in the next step directly for version 1.34.0 using `wget https://github.com/mapbox/tippecanoe/archive/1.34.0.zip && unzip 1.34.0.zip` 
+4. Install Tippecanoe
+    * Prereqs
+        * `sudo apt-get install build-essential libsqlite3-dev zlib1g-dev`
+        * ```sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+           sudo apt-get update -y
+           sudo apt-get install -y g++-5
+           export CXX=g++-5```
+    * `git clone https://github.com/mapbox/tippecanoe.git`
+    * `cd tippecanoe`
+    * `make`
+    * `sudo make install`
+5. Check your install was successful
+    * `tippecanoe --version`
+    * ![](https://cl.ly/ffe6cb6453ea/download/Image%202019-05-05%20at%209.36.51%20AM.png)
+5. Now Tippecanoe is installed, and you can run it from your Ubuntu bash terminal on any files you have on your Windows machine.  
+    * EX I have a geojson file containing polygons representing US ACLU districts in Flordia.  I can now tile it using this command: `tippecanoe -P -ab -o out.mbtiles --coalesce-densest-as-needed --extend-zooms-if-still-dropping -zg --generate-ids -f -l "districts" Florida_63_to_63.geojson`
+    * tippecanoe -o /home/rnd/MapData/bdwaterbodies.mbtiles -l BDWATERBODY -n "BDWATERBODY" -z20 /home/rnd/MapData/mydata.geojson
+
+
 Installation
 ------------
 
